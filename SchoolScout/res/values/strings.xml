@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SchoolScout</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="btn_draw">Draw Route</string>
+
+    <string-array name="drawer">
+        <item>Home</item>
+        <item>Schools</item>
+        <item>About the App</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_school_frag_list">SchoolFragList</string>
+    <string name="title_activity_river_fragment">RiverFragment</string>
+    <string name="title_activity_map_frag">MapFrag</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="revoke_access">Revoke Access</string>
+    <string name="default_status">not signed in yet</string>
+    <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="title_activity_wants_to_be_main">WantsToBeMain</string>
+
+</resources>
