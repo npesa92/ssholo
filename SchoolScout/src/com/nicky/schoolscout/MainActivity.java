@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
 	SharedPreferences pref;
     SharedPreferences.Editor editor;
     boolean checkLogIn;
+    //private boolean flag = false;
 	
     int mPosition = 0;
 	String mTitle = "";
@@ -57,24 +58,15 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		checkLogIn();
 		setContentView(R.layout.activity_main);
 		
 		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.RED));
 		
-		pref = getSharedPreferences("USR_PREFS.xml", 0);
+		pref = getSharedPreferences("USR_INFO", 0);
 		editor = pref.edit();
 		
 		//checkLogIn = pref.getBoolean("isLoggedIn", false);
-		
-		if (pref.contains("isLoggedIn")) {
-			
-		}
-		else {
-			Intent login = new Intent();
-			login.setClass(MainActivity.this, LoginScreen.class);
-			startActivity(login);
-			
-		}
 		
 		// Getting an array of country names
 		 listnames = getResources().getStringArray(R.array.drawer);
@@ -110,17 +102,21 @@ public class MainActivity extends Activity {
 		 mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
 		 
 		 // Creating a ToggleButton for NavigationDrawer with drawer event listener
-		 mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer , R.string.drawer_open,R.string.drawer_close){
+		 mDrawerToggle = new ActionBarDrawerToggle(this,
+				 		mDrawerLayout, R.drawable.ic_drawer,
+				 		R.string.drawer_open,
+				 		R.string.drawer_close){
 		 
 		 /** Called when drawer is closed */
 		 public void onDrawerClosed(View view) {
+			 
 			 highlightSelectedCountry();
 			 invalidateOptionsMenu();
 		 }
 		 
 		/** Called when a drawer is opened */
 		 public void onDrawerOpened(View drawerView) {
-			 getActionBar().setTitle("@string/app_name");
+			 getActionBar().setTitle(R.string.app_name);
 			 invalidateOptionsMenu();
 		 }
 		 };
@@ -141,6 +137,7 @@ public class MainActivity extends Activity {
 			switch(position) { // Show fragment for countries : 0 to 4
 			case 0:
 			 	showFragment(position);
+			 	//flag=true;
 			 	break;
 			case 1:
 		 		SchoolFragList schools = new SchoolFragList();
@@ -154,12 +151,14 @@ public class MainActivity extends Activity {
 				ftransaction.replace(R.id.content_frame, schools);
 				ftransaction.commit();
 				//mDrawerLayout.closeDrawer(mDrawerList);
+				//flag=true;
 				break;
 			case 2:
 			 	showFragment(position);
+			 	//flag=true;
 			 	break;
 			default:
-			 	showFragment(0);
+				showFragment(0);
 			 	break;
 			}
 
@@ -235,10 +234,6 @@ public class MainActivity extends Activity {
 
 	        // Setting the index of the currently selected item of mDrawerList
 	        data.putInt("position", position);
-	        //data.putString("disname", extras.getString("disname"));
-	        
-	        /*SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-	        String name = preferences.getString("disname", "");*/
 
 	        // Setting the position to the fragment
 	        rfrag.setArguments(data);
@@ -254,8 +249,23 @@ public class MainActivity extends Activity {
 	 public void highlightSelectedCountry(){
 		 int selectedItem = mDrawerList.getCheckedItemPosition();
 	 	 mPosition = selectedItem;
-	 	 mDrawerList.setItemChecked(mPosition, true);
-		 getActionBar().setTitle(listnames[mPosition]);
+	 	 if (mPosition != -1) {
+	 		 mDrawerList.setItemChecked(mPosition, true);
+	 		 getActionBar().setTitle(listnames[mPosition]);
+	 	 }
+	 }
+	 
+	 public void checkLogIn() {
+		 pref = getSharedPreferences("USR_INFO", 0);
+		 editor = pref.edit();
+		 if (pref.contains("isLoggedIn")) {
+			 
+		 } else {
+				Intent login = new Intent();
+				login.setClass(MainActivity.this, SignintwoActivity.class);
+				startActivity(login);
+				
+			}
 	 }
 
 }

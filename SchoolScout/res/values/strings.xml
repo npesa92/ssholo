@@ -23,5 +23,7 @@
     <string name="default_status">not signed in yet</string>
     <string name="title_activity_login_screen">LoginScreen</string>
     <string name="title_activity_wants_to_be_main">WantsToBeMain</string>
+    <string name="title_activity_signintwo">MainActivity</string>
+    <string name="title_activity_card_adapter">CardAdapter</string>
 
 </resources>

@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="16" />
 
     <permission
         android:name="com.nicky.schoolscout.permission.MAPS_RECEIVE"
@@ -30,7 +30,6 @@
         <activity
             android:name="com.nicky.schoolscout.MainActivity"
             android:label="@string/app_name" >
-            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +47,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyANRhoRngxULhCV6BpkSpZNJI9tVQRqc9I" />
+            android:value="AIzaSyCikJ1sCFdwQW99w8KdW9yg02iUrX88X9I" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -66,10 +65,12 @@
             android:label="@string/title_activity_login_screen" >
         </activity>
         <activity
-            android:name="com.nicky.schoolscout.WantsToBeMain"
-            android:label="@string/title_activity_wants_to_be_main" >
-            
-            
+            android:name="com.nicky.schoolscout.SignintwoActivity"
+            android:label="@string/title_activity_signintwo" >
+        </activity>
+        <activity
+            android:name="com.nicky.schoolscout.CardAdapter"
+            android:label="@string/title_activity_card_adapter" >
         </activity>
     </application>
 

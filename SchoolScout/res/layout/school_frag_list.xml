@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:paddingLeft="15dp"
+	android:paddingRight="15dp" >
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/layer_card_background"
+    android:paddingLeft="15dp"
+	android:paddingRight="15dp" >
  
     <ImageView
         android:id="@+id/logo"
@@ -16,22 +25,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" 
-        android:background="@drawable/title_shape">
+        android:orientation="vertical"
+         
+        >
  
         <TextView
             android:id="@+id/txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp" 
-            android:background="@drawable/title_shape"/>
+            android:textSize="25sp"
+            android:paddingTop="10dp" 
+           	/>
  
         <TextView
             android:id="@+id/cur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp" />
+            android:textSize="12sp"
+            android:paddingBottom="12dp" />
  
     </LinearLayout>
  
 </LinearLayout>
+</RelativeLayout>

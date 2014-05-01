@@ -48,10 +48,14 @@ public class MapFrag extends FragmentActivity implements LocationListener, OnMap
 	GoogleMap googleMap;
 	int longs[] = {34069636, 34412900, 32879119, 32774899, 37776490, 39729221};
 	int lats[] = {-118443968, -119843610, -117235880, -117070570, -122450352, -121847048};
-	String schools[] = {"Cal Poly San Luis Obispo", "CSU Long Beach", "CSU Los Angeles", "CSU Monterey Bay", "Chico State",
-			"Fresno State", "Humboldt State", "University of Oregon", "Sacramento State", "San Diego State", "San Francisco State",
-			"San Jose State", "Sonoma State", "UC Berkeley", "UC Davis", "UC Irvine", "UC Los Angeles", "UC Merced", 
-			"UC Riverside", "UC San Diego", "UC San Francisco", "UC Santa Barbara", "UC Santa Cruz"};
+	String schools[] = {"Cal Poly San Luis Obispo", "California State University Long Beach",
+			"California State University Los Angeles", "California State University Monterey Bay", "California State University Chico",
+			"California State University Fresno", "California State University Humboldt", "University of Oregon",
+			"Sacramento State University", "San Diego State University",
+			"San Francisco State University","San Jose State University", "Sonoma State University",
+			"UC Berkeley", "UC Davis", "UC Irvine",
+			"UC Los Angeles", "UC Merced", "UC Riverside", "UC San Diego",
+			"UC San Francisco", "UC Santa Barbara", "UC Santa Cruz"};
 	LatLng latlng;
 	MarkerOptions markerOptions;
 	ArrayList<LatLng> markerPoints;
@@ -109,15 +113,15 @@ public class MapFrag extends FragmentActivity implements LocationListener, OnMap
             //googleMap.moveCamera(CameraUpdateFactory.newLatLng(schlatlng));
             //googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
             
-            new GeocoderTask().execute(schools[position]);
+            new GeocoderTask().execute(schools[position-1]);
         }
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
 		 
 		getActionBar().setDisplayShowHomeEnabled(true);
         
-        //googleMap.setOnMapClickListener(this);
-        //googleMap.setOnMapLongClickListener(this);
+        googleMap.setOnMapClickListener(this);
+        googleMap.setOnMapLongClickListener(this);
     
         
      
@@ -388,8 +392,9 @@ public class MapFrag extends FragmentActivity implements LocationListener, OnMap
  
                 // Locate the first location
                 if(i==0) {
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
-                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                    
+                   googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
+                   //googleMap.animateCamera(CameraUpdateFactory.zoomTo(15)); 
                 }
                 
             }

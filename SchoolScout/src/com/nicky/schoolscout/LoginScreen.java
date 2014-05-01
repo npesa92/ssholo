@@ -1,8 +1,10 @@
 package com.nicky.schoolscout;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +12,12 @@ import android.content.IntentSender.SendIntentException;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -22,6 +27,7 @@ import com.google.android.gms.common.Scopes;
 import com.google.android.gms.plus.PlusClient;
 import com.google.android.gms.plus.model.people.Person;
 import com.google.android.gms.plus.model.people.Person.Image;
+
 
 public class LoginScreen extends Activity implements ConnectionCallbacks, OnConnectionFailedListener, OnClickListener {
 	
@@ -90,31 +96,35 @@ public class LoginScreen extends Activity implements ConnectionCallbacks, OnConn
 	public void onConnected(Bundle connectionHint) {
 	 // We've resolved any connection errors.
 	  mConnectionProgressDialog.dismiss();
-	  String usrname = mPlusClient.getAccountName();
-	  Person curPer = mPlusClient.getCurrentPerson();
-	  String dis_name = curPer.getDisplayName();
+	  //String usrname = mPlusClient.getAccountName();
+	  Person curper = mPlusClient.getCurrentPerson();
+	  String usrname = curper.getDisplayName();
+	  String gphotourl = curper.getImage().getUrl();
+	  String gcoverurl = curper.getCover().getCoverPhoto().getUrl();
 	  String usr_about;
-	  if (curPer.hasAboutMe() == false) {
-		  usr_about = curPer.getAboutMe();
+	  if (curper.hasAboutMe() == false) {
+		  usr_about = curper.getAboutMe();
 	  }
 	  else{
 		  usr_about = "About me from G+ profile empty.";
 	  }
-	  Image coverphoto = curPer.getImage();
+	  //Image coverphoto = curper.getImage();
 	  Toast.makeText(this, usrname + " is logged in.", Toast.LENGTH_LONG).show();
 	  Intent startApp = new Intent();
 	  //startApp.putExtra("usrname", usrname);
 	  //startApp.putExtra("disname", disname);
-	  startApp.setClass(LoginScreen.this, MainActivity.class);
-	  startActivity(startApp);
+	  //startApp.setClass(LoginScreen.this, MainActivity.class);
+	  //startActivity(startApp);
 	  
-	  SharedPreferences preferences = getSharedPreferences("USR_PREFS.xml", 0);
+	  SharedPreferences preferences = getSharedPreferences("USR_INFO", 0);
 	  SharedPreferences.Editor editor = preferences.edit();
 	  editor.putBoolean("isLoggedIn", true);
-	  editor.putString("disname", dis_name);
+	  editor.putString("usrname", usrname);
 	  editor.putString("usrabout", usr_about);
-	  editor.putString("coverphoto", coverphoto.toString());
+	  editor.putString("gphotourl", gphotourl);
 	  editor.commit();
+	  
+	  finish();
 	  
 	}
 	
@@ -145,8 +155,45 @@ public class LoginScreen extends Activity implements ConnectionCallbacks, OnConn
 	                mPlusClient.connect();
 	            }
 	        }
+	    } else if (v.getId() == R.id.schsignin) {
+	    	
+	    } else if (v.getId() == R.id.createaccount) {
+	    	
 	    }
 		
+	}
+	
+	private class Schoolsignin extends AsyncTask<String, Void, String> {
+		
+		EditText userfield;
+		EditText passfield;
+		
+		@Override
+		protected void onPreExecute() {
+			
+		}
+		
+		@Override
+		protected String doInBackground(String... ids) {
+			
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			
+		}
+	}
+	
+	public static class createUser extends Fragment {
+		
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.hello_card, container,
+					false);
+			return rootView;
+		}
 	}
 
 }

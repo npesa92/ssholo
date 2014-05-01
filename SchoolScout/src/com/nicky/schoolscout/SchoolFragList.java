@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/*import com.tipsandtricks.HelloCard.R;
+import com.tipsandtricks.HelloCard.adapters.BaseInflaterAdapter;
+import com.tipsandtricks.HelloCard.adapters.CardItemData;
+import com.tipsandtricks.HelloCard.adapters.inflaters.CardInflater;*/
+
+
+
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -15,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class SchoolFragList extends ListFragment {
 	
@@ -33,16 +43,25 @@ public class SchoolFragList extends ListFragment {
 	        "Sacramento", "San Diego", "San Francisco", "San Jose", "Sonoma", "Berkeley", "Davis", "Irvine",
 	        "Los Angeles", "Merced", "Riverside", "San Diego", "SanFrancisco", "Santa Barbara", "Santa Cruz"
 	    };
+	Context ctx;
 
 	 @Override
 	    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 	 
-	        // Each row in the list stores country name, currency and flag
+	       // Each row in the list stores country name, currency and flag
 	        List<HashMap<String,String>> aList = new ArrayList<HashMap<String,String>>();
+	        
+	        ctx = getActivity().getApplicationContext();
+	        
+	        View v = inflater.inflate(R.layout.listview, container, false);
+	        
+	        ListView lv = (ListView) v.findViewById(android.R.id.list);
+	        lv.addHeaderView(new View(ctx));
+		 	lv.addFooterView(new View(ctx));
 	 
 	        for(int i=0;i<23;i++){
 	            HashMap<String, String> hm = new HashMap<String,String>();
-	            hm.put("txt", "School : " + schools[i]);
+	            hm.put("txt", schools[i]);
 	            hm.put("cur","City : " + currency[i]);
 	            hm.put("flag", Integer.toString(logos[i]) );
 	            aList.add(hm);
@@ -56,18 +75,43 @@ public class SchoolFragList extends ListFragment {
 	 
 	        // Instantiating an adapter to store each items
 	        // R.layout.listview_layout defines the layout of each item
-	        SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(), aList, R.layout.school_frag_list, from, to);
+	        CardAdapter adapter = new CardAdapter(getActivity().getBaseContext(),
+	        		aList, R.layout.school_frag_list, from, to);
 	 
-	        setListAdapter(adapter);
+	        lv.setAdapter(adapter); 
+		 	
+		 	/*ctx = getActivity().getApplicationContext();
+		 
+		 	View v = inflater.inflate(R.layout.listview, container, false);
+		 	ListView list = (ListView) v.findViewById(android.R.id.list);
+		 	list.addHeaderView(new View(ctx));
+		 	list.addFooterView(new View(ctx));
+		 	
+
+			BaseInflaterAdapter<CardItemData> adapter = new BaseInflaterAdapter<CardItemData>(new CardInflater());
+			for (int i = 0; i < schools.length; i++)
+			{
+				CardItemData data = new CardItemData(schools[i],
+						currency[i],
+						"Item " + i + " Line 3", 
+						logos[i]);
+				adapter.addItem(data, false);
+			}
+
+			list.setAdapter(adapter);*/
+			
+			
 	 
-	        return super.onCreateView(inflater, container, savedInstanceState);
+	        return v;
 	    }
 	 
 	 @Override
 	 public void onListItemClick(ListView l, View v, int position, long id) {
-	     // TODO Auto-generated method stub
+		 ctx = getActivity().getApplicationContext();
+		 String x=" " + l.getPositionForView(v);
+		 Toast.makeText(ctx, x, Toast.LENGTH_SHORT).show();
 		 Intent intent = new Intent();
-		 intent.putExtra("position", position);
+		 intent.putExtra("position", l.getPositionForView(v));
 		 intent.setClass(getActivity(), MapFrag.class);
 		 startActivity(intent);
 	     super.onListItemClick(l, v, position, id);

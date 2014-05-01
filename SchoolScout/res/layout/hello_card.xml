@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#E0EEEE"
+	android:orientation="vertical">
+	<TextView
+		android:id="@+id/card"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="15dp"
+		android:padding="15dp"
+		android:background="@drawable/selector_card_background"
+		android:text="Hello New Scout!\nEnter your user info here and get on your way to SchoolScout"/>
+
+	<EditText
+	    android:id="@+id/usrname"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="username" />
+	
+	<TextView
+	    android:id="@+id/usrchecktv"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textSize="12sp"
+	    android:text="usrcheck"
+	    android:layout_gravity="center" />
+
+
+	<EditText
+	    android:id="@+id/pass"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:inputType="textPassword"
+	    android:hint="password" />
+
+	<EditText
+	    android:id="@+id/fname"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="first name" />
+
+	<EditText
+	    android:id="@+id/lname"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="last name" />
+
+	<EditText
+	    android:id="@+id/age"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="age" />
+
+	<EditText
+	    android:id="@+id/school"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="school" />
+
+	<Button
+	    android:id="@+id/createaccntbut"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:text="Start Scouting!" />
+
+</LinearLayout>
